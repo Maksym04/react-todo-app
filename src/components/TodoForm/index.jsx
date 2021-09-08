@@ -44,24 +44,31 @@ function TodoForm () {
           {formikProps => (
             <Form className={styles.formBlock}>
               <div className={styles.inputBlock}>
-                <Field name='body' placeholder='Enter todo here'>
+                <Field name='body'>
                   {({ field, form, meta }) => {
                     const inputClassNames = classNames(styles.inputBox, {
                       [styles.validInput]: !meta.error && meta.touched,
                       [styles.invalidInput]: meta.error && meta.touched,
                     });
-                    return <input {...field} className={inputClassNames} />;
+                    return (
+                      <input
+                        {...field}
+                        placeholder='Enter todo here'
+                        className={inputClassNames}
+                      />
+                    );
                   }}
                 </Field>
                 <button className={styles.submitButton} type='submit'>
                   Submit
                 </button>
+
+                <ErrorMessage
+                  name='body'
+                  component='div'
+                  className={styles.errorBox}
+                />
               </div>
-              <ErrorMessage
-                name='body'
-                component='div'
-                className={styles.errorBox}
-              />
             </Form>
           )}
         </Formik>
