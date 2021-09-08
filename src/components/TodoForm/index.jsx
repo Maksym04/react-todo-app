@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { TODO_SCHEMA } from '../../utils/validatingSchemas';
@@ -43,11 +44,15 @@ function TodoForm () {
           {formikProps => (
             <Form className={styles.formBlock}>
               <div className={styles.inputBlock}>
-                <Field
-                  name='body'
-                  placeholder='Enter todo here'
-                  className={styles.inputBox}
-                />
+                <Field name='body' placeholder='Enter todo here'>
+                  {({ field, form, meta }) => {
+                    const inputClassNames = classNames(styles.inputBox, {
+                      [styles.validInput]: !meta.error && meta.touched,
+                      [styles.invalidInput]: meta.error && meta.touched,
+                    });
+                    return <input {...field} className={inputClassNames} />;
+                  }}
+                </Field>
                 <button className={styles.submitButton} type='submit'>
                   Submit
                 </button>
