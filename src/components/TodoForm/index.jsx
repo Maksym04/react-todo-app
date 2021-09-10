@@ -54,7 +54,6 @@ function TodoForm () {
                       <input
                         {...field}
                         placeholder='Enter todo here'
-                        autoFocus
                         className={inputClassNames}
                       />
                     );
